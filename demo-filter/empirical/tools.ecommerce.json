@@ -1,0 +1,246 @@
+{
+  "version": 1,
+  "tools": [
+    {
+      "name": "search_products",
+      "description": "Search the store catalog by text, category, color, and maximum price. Use for finding, filtering, or browsing products.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "category": {
+            "type": "string",
+            "enum": ["tshirt", "hoodie", "shoes", "hat", "accessory"]
+          },
+          "color": {
+            "type": "string",
+            "enum": ["red", "blue", "black", "white", "green", "yellow"]
+          },
+          "max_price": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": ["query"],
+        "additionalProperties": false
+      },
+      "destructive": false,
+      "executable": true,
+      "method": "GET",
+      "url": "/actions/search-products",
+      "success_template": "Found {result[count]} product(s).",
+      "confirm_summary": null,
+      "examples": [
+        {
+          "user": "find tshirt with color red",
+          "output": {
+            "tool": "search_products",
+            "args": { "query": "tshirt", "color": "red" }
+          }
+        },
+        {
+          "user": "show me hoodies under 60 dollars",
+          "output": {
+            "tool": "search_products",
+            "args": { "query": "hoodie", "max_price": 60 }
+          }
+        },
+        {
+          "user": "list everything",
+          "output": {
+            "tool": "search_products",
+            "args": { "query": "all" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "add_to_cart",
+      "description": "Add a product to the shopping cart by name, with an optional color and quantity. Use when the user asks to add or buy an item.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "product_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "color": {
+            "type": "string",
+            "enum": ["red", "blue", "black", "white", "green", "yellow"]
+          },
+          "qty": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": ["product_name"],
+        "additionalProperties": false
+      },
+      "destructive": false,
+      "executable": true,
+      "method": "POST",
+      "url": "/actions/cart",
+      "success_template": "Added {result[name]} to cart.",
+      "confirm_summary": null,
+      "examples": [
+        {
+          "user": "add the red tshirt to my cart",
+          "output": {
+            "tool": "add_to_cart",
+            "args": { "product_name": "tshirt", "color": "red", "qty": 1 }
+          }
+        },
+        {
+          "user": "put two black hoodies in my cart",
+          "output": {
+            "tool": "add_to_cart",
+            "args": { "product_name": "hoodie", "color": "black", "qty": 2 }
+          }
+        }
+      ]
+    },
+    {
+      "name": "remove_from_cart",
+      "description": "Remove a product from the shopping cart by name and optional color. Destructive.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "product_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "color": {
+            "type": "string",
+            "enum": ["red", "blue", "black", "white", "green", "yellow"]
+          }
+        },
+        "required": ["product_name"],
+        "additionalProperties": false
+      },
+      "destructive": true,
+      "executable": true,
+      "method": "POST",
+      "url": "/actions/cart/remove",
+      "success_template": "Removed {result[name]} from cart.",
+      "confirm_summary": "Remove {product_name} from your cart?",
+      "examples": [
+        {
+          "user": "remove the red tshirt from my cart",
+          "output": {
+            "tool": "remove_from_cart",
+            "args": { "product_name": "tshirt", "color": "red" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "open_product",
+      "description": "Open the product detail page for a product by name and optional color.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "product_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "color": {
+            "type": "string",
+            "enum": ["red", "blue", "black", "white", "green", "yellow"]
+          }
+        },
+        "required": ["product_name"],
+        "additionalProperties": false
+      },
+      "destructive": false,
+      "executable": true,
+      "method": "GET",
+      "url": "/actions/product",
+      "success_template": "Opening {result[name]}.",
+      "confirm_summary": null,
+      "examples": [
+        {
+          "user": "open the black hoodie",
+          "output": {
+            "tool": "open_product",
+            "args": { "product_name": "hoodie", "color": "black" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "navigate",
+      "description": "Navigate the storefront to the home page, cart, or checkout.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "string",
+            "enum": ["home", "cart", "checkout"]
+          }
+        },
+        "required": ["page"],
+        "additionalProperties": false
+      },
+      "destructive": false,
+      "executable": true,
+      "method": "GET",
+      "url": "/actions/navigate",
+      "success_template": "Opening {page}.",
+      "confirm_summary": null,
+      "examples": [
+        {
+          "user": "go to checkout",
+          "output": {
+            "tool": "navigate",
+            "args": { "page": "checkout" }
+          }
+        },
+        {
+          "user": "show me my cart",
+          "output": {
+            "tool": "navigate",
+            "args": { "page": "cart" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "none",
+      "description": "Use when the message is not a storefront shopping command.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "required": ["reason"],
+        "additionalProperties": false
+      },
+      "destructive": false,
+      "executable": false,
+      "method": null,
+      "url": null,
+      "success_template": null,
+      "confirm_summary": null,
+      "examples": [
+        {
+          "user": "what is the weather in Cairo",
+          "output": {
+            "tool": "none",
+            "args": { "reason": "That is not a storefront shopping command." }
+          }
+        }
+      ]
+    }
+  ]
+}

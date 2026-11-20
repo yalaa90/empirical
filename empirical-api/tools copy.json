@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "tools": [
+    {
+      "name": "add_item",
+      "description": "Add an item to inventory.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "qty": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": ["name", "qty"],
+        "additionalProperties": false
+      },
+      "destructive": false,
+      "executable": true,
+      "method": "POST",
+      "url": "/items",
+      "success_template": "Added {qty} {name}",
+      "confirm_summary": null,
+      "examples": [
+        {
+          "user": "add 3 apples",
+          "output": {
+            "tool": "add_item",
+            "args": {"name": "apples", "qty": 3}
+          }
+        },
+        {
+          "user": "I need two boxes of tea",
+          "output": {
+            "tool": "add_item",
+            "args": {"name": "boxes of tea", "qty": 2}
+          }
+        },
+        {
+          "user": "put 10 pens in inventory",
+          "output": {
+            "tool": "add_item",
+            "args": {"name": "pens", "qty": 10}
+          }
+        }
+      ]
+    },
+    {
+      "name": "delete_item",
+      "description": "Delete an inventory item by id. Destructive.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": ["id"],
+        "additionalProperties": false
+      },
+      "destructive": true,
+      "executable": true,
+      "method": "DELETE",
+      "url": "/items/{id}",
+      "success_template": "Deleted item {id}",
+      "confirm_summary": "Delete item {id}?",
+      "examples": [
+        {
+          "user": "delete item 5",
+          "output": {
+            "tool": "delete_item",
+            "args": {"id": 5}
+          }
+        },
+        {
+          "user": "remove item 12",
+          "output": {
+            "tool": "delete_item",
+            "args": {"id": 12}
+          }
+        }
+      ]
+    },
+    {
+      "name": "list_items",
+      "description": "List inventory items, optionally filtered by text.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "destructive": false,
+      "executable": true,
+      "method": "GET",
+      "url": "/items",
+      "success_template": "Found {result[count]} item(s).",
+      "confirm_summary": null,
+      "examples": [
+        {
+          "user": "list all items",
+          "output": {
+            "tool": "list_items",
+            "args": {}
+          }
+        },
+        {
+          "user": "show me apples",
+          "output": {
+            "tool": "list_items",
+            "args": {"query": "apples"}
+          }
+        }
+      ]
+    },
+    {
+      "name": "none",
+      "description": "Use when the message is not an inventory command.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "required": ["reason"],
+        "additionalProperties": false
+      },
+      "destructive": false,
+      "executable": false,
+      "method": null,
+      "url": null,
+      "success_template": null,
+      "confirm_summary": null,
+      "examples": [
+        {
+          "user": "what's the weather in Cairo?",
+          "output": {
+            "tool": "none",
+            "args": {"reason": "No inventory tool matches a weather question."}
+          }
+        }
+      ]
+    }
+  ]
+}
