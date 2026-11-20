@@ -75,7 +75,7 @@ services:
         - CMD
         - python
         - -c
-        - import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/health', timeout=2)
+        - import socket, urllib.request; socket.gethostbyname('mock-api'); urllib.request.urlopen('http://mock-api:8001/health', timeout=2)
       interval: 5s
       timeout: 3s
       retries: 5
@@ -114,7 +114,7 @@ services:
         - CMD
         - python
         - -c
-        - import urllib.request; urllib.request.urlopen('http://127.0.0.1:8049/health', timeout=5)
+        - import urllib.request; urllib.request.urlopen('http://127.0.0.1:8049/health', timeout=5); urllib.request.urlopen('http://mock-api:8001/health', timeout=2)
       interval: 10s
       timeout: 6s
       retries: 6
