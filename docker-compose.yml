@@ -96,12 +96,12 @@ services:
       LLM_URL: http://llm:8080
       LLM_MODEL: qwen1.5-1.8b-chat
       BASE_URL: http://mock-api:8001
-      TOOLS_PATH: /app/tools.json
+      TOOLS_PATH: /app/tools.ecommerce.json
     env_file:
       - path: .env
         required: false
     volumes:
-      - ./demo-filter/empirical/tools.json:/app/tools.json:ro
+      - ./demo-filter/empirical/tools.ecommerce.json:/app/tools.ecommerce.json:ro
     ports:
       - "${API_PORT:-8049}:8049"
     depends_on:
@@ -132,8 +132,8 @@ services:
       PORT: "5175"
       EMPIRICAL_API_URL: http://api:8049
     networks:
-      gateway:
-        external: true
+      - default
+      - traefik
     labels:
       - traefik.enable=true
       - traefik.docker.network=${TRAEFIK_NETWORK:-traefik}
@@ -168,8 +168,8 @@ services:
     environment:
       NODE_ENV: production
     networks:
-      gateway:
-        external: true
+      - default
+      - traefik
     labels:
       - traefik.enable=true
       - traefik.docker.network=${TRAEFIK_NETWORK:-traefik}
@@ -194,7 +194,8 @@ services:
     restart: unless-stopped
 
 networks:
-  gateway:
+  traefik:
+    name: ${TRAEFIK_NETWORK:-traefik}
     external: true
 
 volumes:
