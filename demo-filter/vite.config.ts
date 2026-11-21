@@ -13,4 +13,8 @@ export default defineConfig({
     port: 5176,
     strictPort: true,
   },
+  preview: {
+    // Traefik forwards the public domain in the Host header.
+    allowedHosts: true,
+  },
 })

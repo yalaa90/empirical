@@ -131,8 +131,17 @@ services:
       HOST: 0.0.0.0
       PORT: "5175"
       EMPIRICAL_API_URL: http://api:8049
-    ports:
-      - "${WEB_PORT:-5175}:5175"
+    networks:
+      gateway:
+        external: true
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=${TRAEFIK_NETWORK:-traefik}
+      - traefik.http.routers.empirical-web.rule=Host(`${WEB_DOMAIN:-chat.localhost}`)
+      - traefik.http.routers.empirical-web.entrypoints=websecure
+      - traefik.http.routers.empirical-web.tls=true
+      - traefik.http.routers.empirical-web.tls.certresolver=${TRAEFIK_CERT_RESOLVER:-letsencrypt}
+      - traefik.http.services.empirical-web.loadbalancer.server.port=5175
     depends_on:
       api:
         condition: service_healthy
@@ -158,8 +167,17 @@ services:
     image: empirical-storefront:local
     environment:
       NODE_ENV: production
-    ports:
-      - "${STOREFRONT_PORT:-5176}:5176"
+    networks:
+      gateway:
+        external: true
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=${TRAEFIK_NETWORK:-traefik}
+      - traefik.http.routers.empirical-store.rule=Host(`${STOREFRONT_DOMAIN:-shop.localhost}`)
+      - traefik.http.routers.empirical-store.entrypoints=websecure
+      - traefik.http.routers.empirical-store.tls=true
+      - traefik.http.routers.empirical-store.tls.certresolver=${TRAEFIK_CERT_RESOLVER:-letsencrypt}
+      - traefik.http.services.empirical-store.loadbalancer.server.port=5176
     depends_on:
       web:
         condition: service_healthy
@@ -174,6 +192,10 @@ services:
       retries: 6
       start_period: 10s
     restart: unless-stopped
+
+networks:
+  gateway:
+    external: true
 
 volumes:
   models:
