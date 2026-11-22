@@ -3,6 +3,8 @@ import rawProducts from '@/data/products.json'
 import {
   DEFAULT_FILTERS,
   filterProducts,
+  inferCategoryFromQuery,
+  normalizeCategory,
   parseFilters,
   toSearchParams,
 } from '@/lib/filters'
@@ -49,6 +51,15 @@ describe('parseFilters', () => {
     expect(filters).toEqual(DEFAULT_FILTERS)
   })
 
+  it('normalizes category aliases from URL params', () => {
+    expect(parseFilters(new URLSearchParams('category=t-shirts')).category).toBe(
+      'tshirt',
+    )
+    expect(parseFilters(new URLSearchParams('category=hoodies')).category).toBe(
+      'hoodie',
+    )
+  })
+
   it('round-trips through search params', () => {
     const filters = {
       ...DEFAULT_FILTERS,
@@ -58,6 +69,22 @@ describe('parseFilters', () => {
       maxPrice: 50,
     }
     expect(parseFilters(toSearchParams(filters))).toEqual(filters)
+  })
+})
+
+describe('category inference', () => {
+  it('normalizes category aliases', () => {
+    expect(normalizeCategory('t-shirts')).toBe('tshirt')
+    expect(normalizeCategory('tshirts')).toBe('tshirt')
+    expect(normalizeCategory('hoodies')).toBe('hoodie')
+    expect(normalizeCategory('accessories')).toBe('accessory')
+    expect(normalizeCategory('unknown')).toBeNull()
+  })
+
+  it('infers category from a search query', () => {
+    expect(inferCategoryFromQuery('find t-shirts')).toBe('tshirt')
+    expect(inferCategoryFromQuery('red hoodies')).toBe('hoodie')
+    expect(inferCategoryFromQuery('all')).toBeNull()
   })
 })
 
@@ -75,6 +102,28 @@ describe('filterProducts', () => {
         (product) => product.category === 'tshirt' && product.color === 'red',
       ),
     ).toBe(true)
+  })
+
+  it('matches plural category queries', () => {
+    expect(
+      filterProducts(products, { ...DEFAULT_FILTERS, query: 't-shirts' }),
+    ).toHaveLength(25)
+    expect(
+      filterProducts(products, { ...DEFAULT_FILTERS, query: 'hoodies' }),
+    ).toHaveLength(20)
+    expect(
+      filterProducts(products, {
+        ...DEFAULT_FILTERS,
+        query: 'accessories',
+        category: 'accessory',
+      }),
+    ).toHaveLength(20)
+  })
+
+  it('matches category aliases like tees', () => {
+    expect(
+      filterProducts(products, { ...DEFAULT_FILTERS, query: 'tees' }),
+    ).toHaveLength(25)
   })
 
   it('applies a maximum price', () => {

@@ -15,7 +15,11 @@ def test_search_red_tshirt(make_harness) -> None:
         assert body["status"] == "ok"
         assert body["tool"] == "search_products"
         assert body["data"]["action"] == "search_products"
-        assert body["data"]["filters"] == {"query": "tshirt", "color": "red"}
+        assert body["data"]["filters"] == {
+            "query": "tshirt",
+            "category": "tshirt",
+            "color": "red",
+        }
         assert body["data"]["count"] == 5
         assert body["result"] == f"Found {body['data']['count']} product(s)."
         assert body["data"]["product_ids"] == [
@@ -25,6 +29,130 @@ def test_search_red_tshirt(make_harness) -> None:
         assert all(item["color"] == "red" for item in body["data"]["items"])
         assert len(h.fake.calls) == 1
         assert h.fake.calls[0]["correction"] is None
+
+
+def test_search_hoodie_drops_copied_color_and_price(make_harness) -> None:
+    with make_harness(
+        [
+            action(
+                "search_products",
+                query="hoodie",
+                category="hoodie",
+                color="red",
+                max_price=60,
+            )
+        ]
+    ) as h:
+        response = h.client.post(
+            "/chat",
+            json={"message": "find hoodie"},
+            headers={"X-Session-Id": "alice"},
+        )
+        assert response.status_code == 200
+        body = response.json()
+        assert body["data"]["filters"] == {"query": "hoodie", "category": "hoodie"}
+        assert body["data"]["count"] == 20
+        assert all(item["category"] == "hoodie" for item in body["data"]["items"])
+
+
+def test_search_tshirts_infers_category_and_drops_copied_color(make_harness) -> None:
+    with make_harness(
+        [
+            action(
+                "search_products",
+                query="t-shirts",
+                category="tshirt",
+                color="red",
+            )
+        ]
+    ) as h:
+        response = h.client.post(
+            "/chat",
+            json={"message": "find T-shirts"},
+            headers={"X-Session-Id": "alice"},
+        )
+        assert response.status_code == 200
+        body = response.json()
+        assert body["data"]["filters"] == {
+            "query": "t-shirts",
+            "category": "tshirt",
+        }
+        assert body["data"]["count"] == 25
+        assert all(item["category"] == "tshirt" for item in body["data"]["items"])
+
+
+def test_search_keeps_explicit_color_and_price(make_harness) -> None:
+    with make_harness(
+        [
+            action(
+                "search_products",
+                query="t-shirts",
+                category="tshirt",
+                color="red",
+                max_price=60,
+            )
+        ]
+    ) as h:
+        response = h.client.post(
+            "/chat",
+            json={"message": "find red t-shirts under 60 dollars"},
+            headers={"X-Session-Id": "alice"},
+        )
+        assert response.status_code == 200
+        body = response.json()
+        assert body["data"]["filters"] == {
+            "query": "t-shirts",
+            "category": "tshirt",
+            "color": "red",
+            "max_price": 60.0,
+        }
+
+
+def test_search_replaces_copied_query_from_example(make_harness) -> None:
+    with make_harness(
+        [
+            action(
+                "search_products",
+                query="hoodies",
+                category="hoodie",
+                color="red",
+            )
+        ]
+    ) as h:
+        response = h.client.post(
+            "/chat",
+            json={"message": "find t-shirts"},
+            headers={"X-Session-Id": "alice"},
+        )
+        assert response.status_code == 200
+        body = response.json()
+        assert body["data"]["filters"] == {
+            "query": "tshirt",
+            "category": "tshirt",
+        }
+        assert body["data"]["count"] == 25
+
+
+def test_search_everything_uses_all_query(make_harness) -> None:
+    with make_harness(
+        [
+            action(
+                "search_products",
+                query="t-shirts",
+                category="tshirt",
+                color="red",
+            )
+        ]
+    ) as h:
+        response = h.client.post(
+            "/chat",
+            json={"message": "show me everything"},
+            headers={"X-Session-Id": "alice"},
+        )
+        assert response.status_code == 200
+        body = response.json()
+        assert body["data"]["filters"] == {"query": "all"}
+        assert body["data"]["count"] == 100
 
 
 def test_add_red_tshirt_to_cart(make_harness) -> None:

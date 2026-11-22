@@ -11,6 +11,17 @@ const host = process.env.MOCK_API_HOST ?? '127.0.0.1'
 const CATEGORIES = new Set(['tshirt', 'hoodie', 'shoes', 'hat', 'accessory'])
 const COLORS = new Set(['red', 'blue', 'black', 'white', 'green', 'yellow'])
 const PAGES = new Set(['home', 'cart', 'checkout'])
+const CATEGORY_PATTERNS = [
+  ['tshirt', /\b(?:tshirts?|shirts?|tees?)\b/i],
+  ['hoodie', /\bhood(?:ie|y)s?\b/i],
+  ['shoes', /\b(?:shoes?|sneakers?|footwear)\b/i],
+  ['hat', /\b(?:hats?|caps?|beanies?)\b/i],
+  ['accessory', /\b(?:accessor(?:y|ies)|bags?|wallets?|bottles?|socks?|totes?)\b/i],
+]
+const IRREGULAR_PLURALS = {
+  accessories: 'accessory',
+  beanies: 'beanie',
+}
 const STOP_WORDS = new Set([
   'a',
   'an',
@@ -46,11 +57,34 @@ function normalize(value) {
     .trim()
 }
 
+function singularize(token) {
+  if (IRREGULAR_PLURALS[token]) return IRREGULAR_PLURALS[token]
+  if (token.length > 4 && token.endsWith('ies')) return token.slice(0, -3) + 'y'
+  if (token.length > 3 && token.endsWith('s') && !token.endsWith('ss')) {
+    return token.slice(0, -1)
+  }
+  return token
+}
+
 function tokens(value) {
   return normalize(value)
     .split(' ')
     .filter((token) => token.length > 1 && !STOP_WORDS.has(token))
-    .map((token) => (token.length > 3 && token.endsWith('s') ? token.slice(0, -1) : token))
+    .map(singularize)
+}
+
+function inferCategory(value) {
+  const text = String(value ?? '')
+  const matches = CATEGORY_PATTERNS.filter(([, pattern]) => pattern.test(text)).map(
+    ([key]) => key,
+  )
+  return matches.length === 1 ? matches[0] : null
+}
+
+function normalizeCategory(value) {
+  const lowered = String(value ?? '').trim().toLowerCase()
+  if (CATEGORIES.has(lowered)) return lowered
+  return inferCategory(lowered)
 }
 
 function productTokens(product) {
@@ -101,8 +135,9 @@ function findProduct(productName, color) {
 }
 
 function searchProducts(params) {
-  const queryTokens = tokens(params.get('query') ?? '')
-  const category = (params.get('category') ?? '').toLowerCase()
+  const query = params.get('query') ?? ''
+  const queryTokens = tokens(query)
+  const category = normalizeCategory(params.get('category')) ?? inferCategory(query) ?? ''
   const color = (params.get('color') ?? '').toLowerCase()
   const maxPriceRaw = params.get('max_price')
   const maxPrice = maxPriceRaw ? Number(maxPriceRaw) : null
@@ -124,7 +159,6 @@ function searchProducts(params) {
   })
 
   const filters = {}
-  const query = params.get('query')
   if (query) filters.query = query
   if (category && CATEGORIES.has(category)) filters.category = category
   if (color && COLORS.has(color)) filters.color = color

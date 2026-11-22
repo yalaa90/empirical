@@ -47,11 +47,39 @@ def test_search_returns_red_tshirt_and_filters() -> None:
     assert response.status_code == 200
     body = response.json()
     assert body["action"] == "search_products"
-    assert body["filters"] == {"query": "tshirt", "color": "red"}
+    assert body["filters"] == {
+        "query": "tshirt",
+        "category": "tshirt",
+        "color": "red",
+    }
     assert body["count"] == 5
     assert body["product_ids"] == [item["id"] for item in body["items"]]
     assert all(item["category"] == "tshirt" for item in body["items"])
     assert all(item["color"] == "red" for item in body["items"])
+
+
+def test_search_infers_category_from_plural_query() -> None:
+    response = _client().get(
+        "/actions/search-products",
+        params={"query": "t-shirts"},
+    )
+    assert response.status_code == 200
+    body = response.json()
+    assert body["filters"] == {"query": "t-shirts", "category": "tshirt"}
+    assert body["count"] == 25
+    assert all(item["category"] == "tshirt" for item in body["items"])
+
+
+def test_search_infers_accessory_category_from_plural_query() -> None:
+    response = _client().get(
+        "/actions/search-products",
+        params={"query": "accessories"},
+    )
+    assert response.status_code == 200
+    body = response.json()
+    assert body["filters"] == {"query": "accessories", "category": "accessory"}
+    assert body["count"] == 20
+    assert all(item["category"] == "accessory" for item in body["items"])
 
 
 def test_search_filters_category_and_max_price() -> None:

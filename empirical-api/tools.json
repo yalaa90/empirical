@@ -36,17 +36,17 @@
       "confirm_summary": null,
       "examples": [
         {
-          "user": "find tshirt with color red",
+          "user": "find t-shirts",
           "output": {
             "tool": "search_products",
-            "args": { "query": "tshirt", "color": "red" }
+            "args": { "query": "t-shirts", "category": "tshirt" }
           }
         },
         {
-          "user": "show me hoodies under 60 dollars",
+          "user": "find hoodies",
           "output": {
             "tool": "search_products",
-            "args": { "query": "hoodie", "max_price": 60 }
+            "args": { "query": "hoodies", "category": "hoodie" }
           }
         },
         {
@@ -89,10 +89,10 @@
       "confirm_summary": null,
       "examples": [
         {
-          "user": "add the red tshirt to my cart",
+          "user": "add a hoodie to my cart",
           "output": {
             "tool": "add_to_cart",
-            "args": { "product_name": "tshirt", "color": "red", "qty": 1 }
+            "args": { "product_name": "hoodie" }
           }
         },
         {

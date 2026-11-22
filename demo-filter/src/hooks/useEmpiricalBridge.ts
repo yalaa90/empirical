@@ -2,7 +2,13 @@ import { useCallback, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { EMPIRICAL_WEB_ORIGIN } from '@/lib/empirical'
 import { getProductById } from '@/lib/catalog'
-import { isCategory, isColor, toSearchParams, DEFAULT_FILTERS } from '@/lib/filters'
+import {
+  DEFAULT_FILTERS,
+  inferCategoryFromQuery,
+  isColor,
+  normalizeCategory,
+  toSearchParams,
+} from '@/lib/filters'
 import { formatPrice } from '@/lib/utils'
 import { useCartStore } from '@/store/cartStore'
 import { useUiStore } from '@/store/uiStore'
@@ -32,8 +38,13 @@ function chatFiltersToCatalog(filters: ChatFilterPayload | undefined): CatalogFi
   if (query && query !== '*' && query.toLowerCase() !== 'all') {
     next.query = query
   }
-  if (typeof filters.category === 'string' && isCategory(filters.category)) {
-    next.category = filters.category
+  const inferredCategory = inferCategoryFromQuery(query)
+  const explicitCategory =
+    typeof filters.category === 'string' ? normalizeCategory(filters.category) : null
+  if (inferredCategory) {
+    next.category = inferredCategory
+  } else if (explicitCategory) {
+    next.category = explicitCategory
   }
   if (typeof filters.color === 'string' && isColor(filters.color)) {
     next.color = filters.color

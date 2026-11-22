@@ -9,6 +9,8 @@ from fastapi import FastAPI, Query
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
 
+from app.catalog_terms import infer_category, normalize_category, normalize_text, tokenize
+
 Color = Literal["red", "blue", "black", "white", "green", "yellow"]
 Category = Literal["tshirt", "hoodie", "shoes", "hat", "accessory"]
 Page = Literal["home", "cart", "checkout"]
@@ -85,35 +87,6 @@ CATEGORIES: tuple[dict[str, Any], ...] = (
         "blurb": "a durable everyday essential made for repeat use",
     },
 )
-
-STOP_WORDS = frozenset(
-    {
-        "a",
-        "an",
-        "and",
-        "the",
-        "to",
-        "my",
-        "me",
-        "in",
-        "of",
-        "for",
-        "with",
-        "please",
-        "find",
-        "show",
-        "get",
-        "add",
-        "put",
-        "open",
-        "go",
-        "take",
-        "want",
-        "need",
-        "some",
-    }
-)
-
 
 def _mulberry32(seed: int) -> Callable[[], float]:
     value = seed & 0xFFFFFFFF
@@ -220,18 +193,11 @@ class RemoveFromCartRequest(BaseModel):
 
 
 def _normalize(value: str) -> str:
-    return re.sub(r"[^a-z0-9]+", " ", str(value or "").lower()).strip()
+    return normalize_text(value)
 
 
 def _tokens(value: str) -> list[str]:
-    result: list[str] = []
-    for token in _normalize(value).split(" "):
-        if len(token) <= 1 or token in STOP_WORDS:
-            continue
-        if len(token) > 3 and token.endswith("s"):
-            token = token[:-1]
-        result.append(token)
-    return result
+    return tokenize(value)
 
 
 def _product_tokens(product: dict[str, Any]) -> set[str]:
@@ -401,10 +367,11 @@ def create_mock_storefront_app(storefront: MockStorefront | None = None) -> Fast
         color: Color | None = Query(default=None),
         max_price: float | None = Query(default=None, ge=1),
     ) -> dict[str, Any]:
-        found = shop.search_products(query, category, color, max_price)
+        resolved_category = normalize_category(category) or infer_category(query)
+        found = shop.search_products(query, resolved_category, color, max_price)
         return {
             "action": "search_products",
-            "filters": _search_filters(query, category, color, max_price),
+            "filters": _search_filters(query, resolved_category, color, max_price),
             "count": len(found),
             "product_ids": [product["id"] for product in found],
             "items": found,

@@ -104,7 +104,7 @@ class Orchestrator:
 
             validate_started = time.perf_counter()
             try:
-                action = validate_model_output(result.content, self._registry)
+                action = validate_model_output(result.content, self._registry, message)
                 validate_ms += int(round((time.perf_counter() - validate_started) * 1000))
                 log_event(
                     logger,

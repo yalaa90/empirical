@@ -5,6 +5,7 @@ from typing import Any
 
 import jsonschema
 
+from app.catalog_terms import sanitize_args
 from app.errors import ValidationFailure
 from app.models import ValidatedAction
 from app.registry import ToolRegistry
@@ -13,7 +14,11 @@ _MAX_MODEL_OUTPUT_CHARS = 10_000
 _MAX_HINT_CHARS = 300
 
 
-def validate_model_output(raw: str, registry: ToolRegistry) -> ValidatedAction:
+def validate_model_output(
+    raw: str,
+    registry: ToolRegistry,
+    message: str | None = None,
+) -> ValidatedAction:
     if not isinstance(raw, str) or not raw.strip():
         raise ValidationFailure("The model returned an empty response.", "Output must be one JSON object.")
     if len(raw) > _MAX_MODEL_OUTPUT_CHARS:
@@ -53,6 +58,7 @@ def validate_model_output(raw: str, registry: ToolRegistry) -> ValidatedAction:
         raise ValidationFailure("The model's 'args' value must be an object.", "'args' must be a JSON object.")
 
     spec = registry.get(tool_name)
+    args = sanitize_args(spec.name, args, message)
     try:
         registry.validate_args(spec, args)
     except jsonschema.ValidationError as exc:

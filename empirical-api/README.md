@@ -226,7 +226,7 @@ curl -s http://127.0.0.1:8049/chat \
   "result": "Found 5 product(s).",
   "data": {
     "action": "search_products",
-    "filters": {"query": "tshirt", "color": "red"},
+    "filters": {"query": "tshirt", "category": "tshirt", "color": "red"},
     "count": 5,
     "product_ids": [1, 2, 3, 4, 5],
     "items": [
