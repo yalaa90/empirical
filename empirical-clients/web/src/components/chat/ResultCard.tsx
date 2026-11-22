@@ -1,7 +1,11 @@
-import { getItems } from '@/lib/response'
+import { ProductList } from '@/components/chat/ProductList'
+import { getItems, getProducts } from '@/lib/response'
 import { compactJson } from '@/lib/utils'
 
 export function ResultCard({ data }: { data: unknown }) {
+  const products = getProducts(data)
+  if (products) return <ProductList products={products} />
+
   const items = getItems(data)
 
   if (items) {

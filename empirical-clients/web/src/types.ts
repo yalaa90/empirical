@@ -19,6 +19,15 @@ export interface InventoryItem {
   qty: number
 }
 
+export interface ProductItem {
+  id: number
+  name: string
+  image?: string
+  price?: number
+  color?: string
+  stock?: number
+}
+
 export interface ChatData {
   items?: InventoryItem[]
   count?: number

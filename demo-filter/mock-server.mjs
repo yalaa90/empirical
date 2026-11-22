@@ -169,6 +169,7 @@ function searchProducts(params) {
     filters,
     count: matches.length,
     product_ids: matches.map((product) => product.id),
+    items: matches,
   }
 }
 

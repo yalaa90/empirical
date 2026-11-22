@@ -167,7 +167,8 @@ def _generate_products() -> list[dict[str, Any]]:
                         "finish. Built for repeat wear and easy styling."
                     ),
                     "tags": [category["key"], color["key"], *category["tags"]],
-                    "image": f"https://picsum.photos/seed/northline-{product_id}/720/860",
+                    # Same path the storefront serves (demo-filter/public/products).
+                    "image": f"/products/{_slugify(name)}.svg",
                 }
             )
 

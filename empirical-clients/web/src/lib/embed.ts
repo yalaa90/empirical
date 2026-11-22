@@ -55,3 +55,24 @@ export function postToHost(type: string, payload?: unknown): void {
 export function postChatResponse(response: ChatResponse): void {
   postToHost('response', response)
 }
+
+export function resolveHostAsset(path: string | undefined): string | undefined {
+  if (!path) return undefined
+  if (/^(https?:|data:)/i.test(path)) return path
+  if (embedConfig.hostOrigin) {
+    try {
+      return new URL(path, embedConfig.hostOrigin).toString()
+    } catch {
+      return undefined
+    }
+  }
+  return path
+}
+
+export function requestAddToCart(product: { id: number; name: string }): boolean {
+  if (!embedConfig.embedded || !embedConfig.hostOrigin || window.parent === window) {
+    return false
+  }
+  postToHost('add-to-cart', { product_id: product.id, name: product.name, qty: 1 })
+  return true
+}

@@ -1,5 +1,5 @@
 import { ApiError } from '@/api/client'
-import type { ChatData, ChatResponse, InventoryItem } from '@/types'
+import type { ChatData, ChatResponse, InventoryItem, ProductItem } from '@/types'
 
 export function responseToContent(response: ChatResponse): string {
   switch (response.status) {
@@ -50,6 +50,24 @@ export function getItems(data: unknown): InventoryItem[] | null {
       typeof (item as InventoryItem).id === 'number' &&
       typeof (item as InventoryItem).name === 'string',
   )
+}
+
+export function getProducts(data: unknown): ProductItem[] | null {
+  if (!data || typeof data !== 'object') return null
+  const value: unknown = (data as ChatData).items
+  if (!Array.isArray(value)) return null
+  const products = (value as unknown[]).filter(
+    (item): item is ProductItem =>
+      Boolean(item) &&
+      typeof item === 'object' &&
+      typeof (item as ProductItem).id === 'number' &&
+      typeof (item as ProductItem).name === 'string' &&
+      (typeof (item as ProductItem).image === 'string' ||
+        typeof (item as ProductItem).price === 'number'),
+  )
+  return products.length > 0 && products.length === value.length
+    ? products
+    : null
 }
 
 export function errorCodeLabel(code: string | undefined): string {

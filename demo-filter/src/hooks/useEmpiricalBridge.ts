@@ -268,6 +268,17 @@ export function useEmpiricalBridge() {
 
       if (message.type === 'response') {
         handleAction((message.payload ?? {}) as EmpiricalResponsePayload)
+        return
+      }
+
+      // "+" button on a product card in the chat results.
+      if (message.type === 'add-to-cart') {
+        const payload = (message.payload ?? {}) as { product_id?: unknown; qty?: unknown }
+        handleAction({
+          status: 'ok',
+          tool: 'add_to_cart',
+          data: { action: 'add_to_cart', product_id: payload.product_id, qty: payload.qty ?? 1 },
+        } as EmpiricalResponsePayload)
       }
     }
 
