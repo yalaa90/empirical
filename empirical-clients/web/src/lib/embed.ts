@@ -76,3 +76,11 @@ export function requestAddToCart(product: { id: number; name: string }): boolean
   postToHost('add-to-cart', { product_id: product.id, name: product.name, qty: 1 })
   return true
 }
+
+export function requestOpenProduct(product: { id: number; name: string }): boolean {
+  if (!embedConfig.embedded || !embedConfig.hostOrigin || window.parent === window) {
+    return false
+  }
+  postToHost('open-product', { product_id: product.id, name: product.name })
+  return true
+}

@@ -279,6 +279,17 @@ export function useEmpiricalBridge() {
           tool: 'add_to_cart',
           data: { action: 'add_to_cart', product_id: payload.product_id, qty: payload.qty ?? 1 },
         } as EmpiricalResponsePayload)
+        return
+      }
+
+      // Click on a product card in the chat results.
+      if (message.type === 'open-product') {
+        const payload = (message.payload ?? {}) as { product_id?: unknown }
+        handleAction({
+          status: 'ok',
+          tool: 'open_product',
+          data: { action: 'open_product', product_id: payload.product_id },
+        } as EmpiricalResponsePayload)
       }
     }
 
