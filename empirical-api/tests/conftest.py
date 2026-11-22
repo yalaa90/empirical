@@ -45,8 +45,14 @@ class FakeLLM:
         self.mode = "json_schema"
         self.model = "fake-qwen"
 
-    async def propose(self, message: str, correction: str | None = None) -> LLMResult:
-        self.calls.append({"message": message, "correction": correction})
+    async def propose(
+        self,
+        message: str,
+        correction: str | None = None,
+        *,
+        context: str | None = None,
+    ) -> LLMResult:
+        self.calls.append({"message": message, "correction": correction, "context": context})
         if not self.outputs:
             raise AssertionError("FakeLLM ran out of scripted outputs")
         output = self.outputs.pop(0)

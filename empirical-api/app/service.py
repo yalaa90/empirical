@@ -10,7 +10,16 @@ from typing import Any, Callable
 from app.config import Settings
 from app.confirm_store import ConfirmStore
 from app.errors import ActionUnavailable, InvalidRequest, ValidationFailure
+from app.catalog_terms import mentioned_quantities
 from app.executor import Executor
+from app.memory import (
+    REFERENTIAL_TOOLS,
+    SessionMemory,
+    SessionMemoryStore,
+    is_bare_add,
+    prompt_context,
+    resolve_product,
+)
 from app.models import PendingAction, ValidatedAction
 from app.observability import log_event, truncate
 from app.registry import ToolRegistry
@@ -44,8 +53,10 @@ class Orchestrator:
         executor: Executor,
         *,
         clock: Callable[[], float] = time.monotonic,
+        memory: SessionMemoryStore | None = None,
     ) -> None:
         self._settings = settings
+        self._memory = memory if memory is not None else SessionMemoryStore()
         self._registry = registry
         self._llm = llm
         self._store = store
@@ -85,9 +96,12 @@ class Orchestrator:
         action: ValidatedAction | None = None
         last_failure: ValidationFailure | None = None
 
+        memory = self._memory.get(identity)
+        context = prompt_context(memory)
+
         for attempt in (1, 2):
             attempts = attempt
-            result = await self._llm.propose(message, correction)
+            result = await self._llm.propose(message, correction, context=context)
             queue_ms += result.queue_ms
             llm_ms += result.latency_ms
             log_event(
@@ -145,6 +159,19 @@ class Orchestrator:
         if action is None:
             assert last_failure is not None
             raise last_failure
+
+        resolved = self._resolve_from_memory(action, message, memory)
+        if resolved is not action:
+            log_event(
+                logger,
+                "memory.resolved",
+                request_id=request_id,
+                model_tool=action.spec.name,
+                model_args=action.args,
+                tool=resolved.spec.name,
+                args=resolved.args,
+            )
+            action = resolved
 
         spec = action.spec
         if spec.name == "none":
@@ -212,6 +239,7 @@ class Orchestrator:
             }
 
         execution = await self._executor.execute(spec, action.args, authorization)
+        self._memory.record(identity, spec.name, execution.data)
         log_event(
             logger,
             "api.call",
@@ -243,6 +271,52 @@ class Orchestrator:
                 total_ms=_ms(started),
             ),
         }
+
+    def _resolve_from_memory(
+        self,
+        action: ValidatedAction,
+        message: str,
+        memory: SessionMemory | None,
+    ) -> ValidatedAction:
+        """Point follow-ups like "add it" at a product from the last search.
+
+        The model only sees remembered products as text and may still guess an
+        unrelated name, so the final product is chosen here, deterministically.
+        """
+        if memory is None:
+            return action
+        tool = action.spec.name
+        bare_add = is_bare_add(message)
+        if tool not in REFERENTIAL_TOOLS and not bare_add:
+            return action
+        if bare_add and "add_to_cart" not in self._registry:
+            return action
+
+        product = resolve_product(message, memory)
+        if product is None:
+            return action
+
+        if tool in REFERENTIAL_TOOLS and not bare_add:
+            args = dict(action.args)
+            spec = action.spec
+        else:
+            # e.g. "add" alone, which the model may map to `none` or a search.
+            spec = self._registry.get("add_to_cart")
+            args = dict(action.args) if tool == "add_to_cart" else {}
+            quantities = mentioned_quantities(message)
+            if "qty" not in args and len(quantities) == 1:
+                args["qty"] = next(iter(quantities))
+
+        args["product_name"] = product["name"][:80]
+        if product.get("color"):
+            args["color"] = product["color"]
+        else:
+            args.pop("color", None)
+        try:
+            self._registry.validate_args(spec, args)
+        except Exception:
+            return action
+        return ValidatedAction(spec=spec, args=args)
 
     async def confirm(
         self,
@@ -281,6 +355,7 @@ class Orchestrator:
             args=pending.args,
         )
         execution = await self._executor.execute(spec, pending.args, authorization)
+        self._memory.record(identity, spec.name, execution.data)
         log_event(
             logger,
             "api.call",

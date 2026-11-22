@@ -19,6 +19,7 @@ from app.confirm_store import ConfirmStore, InMemoryConfirmStore
 from app.errors import ServiceError
 from app.executor import Executor, create_api_client
 from app.llm import LlamaLLM
+from app.memory import SessionMemoryStore
 from app.observability import configure_logging, log_event
 from app.registry import ToolRegistry
 from app.service import Orchestrator, identity_hash
@@ -40,6 +41,7 @@ def create_app(
     store: ConfirmStore | None = None,
     api_client: httpx.AsyncClient | None = None,
     clock: Callable[[], float] = time.monotonic,
+    memory: SessionMemoryStore | None = None,
 ) -> FastAPI:
     settings = settings or Settings.from_env()
     configure_logging(settings.log_level)
@@ -64,6 +66,7 @@ def create_app(
         store,
         executor,
         clock=clock,
+        memory=memory if memory is not None else SessionMemoryStore(clock=clock),
     )
 
     cleanup_interval = max(1.0, min(30.0, settings.confirm_ttl_s / 2))

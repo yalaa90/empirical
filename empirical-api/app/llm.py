@@ -58,7 +58,13 @@ class LlamaLLM:
     def model(self) -> str:
         return self._settings.llm_model
 
-    async def propose(self, message: str, correction: str | None = None) -> LLMResult:
+    async def propose(
+        self,
+        message: str,
+        correction: str | None = None,
+        *,
+        context: str | None = None,
+    ) -> LLMResult:
         acquired = False
         queue_started = time.perf_counter()
         try:
@@ -70,7 +76,7 @@ class LlamaLLM:
         queue_ms = int(round((time.perf_counter() - queue_started) * 1000))
 
         try:
-            result = await self._propose_inner(message, correction)
+            result = await self._propose_inner(message, correction, context)
             return LLMResult(
                 content=result.content,
                 latency_ms=result.latency_ms,
@@ -83,10 +89,15 @@ class LlamaLLM:
             if acquired:
                 self._semaphore.release()
 
-    async def _propose_inner(self, message: str, correction: str | None) -> LLMResult:
+    async def _propose_inner(
+        self,
+        message: str,
+        correction: str | None,
+        context: str | None = None,
+    ) -> LLMResult:
         if self._mode in {"auto", "json_schema"}:
             try:
-                return await self._post(message, correction, use_grammar=False)
+                return await self._post(message, correction, context, use_grammar=False)
             except _StructuredOutputRejected as exc:
                 if self._mode == "json_schema":
                     raise LLMUnavailable(
@@ -104,11 +115,22 @@ class LlamaLLM:
                             upstream_status=exc.status_code,
                             reason=exc.detail[:300],
                         )
-                return await self._post(message, correction, use_grammar=True)
-        return await self._post(message, correction, use_grammar=True)
+                return await self._post(message, correction, context, use_grammar=True)
+        return await self._post(message, correction, context, use_grammar=True)
 
-    def _payload(self, message: str, correction: str | None, use_grammar: bool) -> dict[str, Any]:
+    def _payload(
+        self,
+        message: str,
+        correction: str | None,
+        use_grammar: bool,
+        context: str | None = None,
+    ) -> dict[str, Any]:
         user_content = message if correction is None else format_retry_message(message, correction)
+        if context:
+            # Conversation memory goes in the user turn, not the system prompt,
+            # so the (large, static) system prompt stays cacheable.
+            header = "" if correction is not None else "User message:\n"
+            user_content = f"Context:\n{context}\n\n{header}{user_content}"
         payload: dict[str, Any] = {
             "model": self._settings.llm_model,
             "messages": [
@@ -126,8 +148,15 @@ class LlamaLLM:
             payload["response_format"] = self._registry.openai_response_format()
         return payload
 
-    async def _post(self, message: str, correction: str | None, *, use_grammar: bool) -> LLMResult:
-        payload = self._payload(message, correction, use_grammar)
+    async def _post(
+        self,
+        message: str,
+        correction: str | None,
+        context: str | None = None,
+        *,
+        use_grammar: bool,
+    ) -> LLMResult:
+        payload = self._payload(message, correction, use_grammar, context)
         headers = {"Content-Type": "application/json"}
         if self._settings.llm_api_key:
             headers["Authorization"] = f"Bearer {self._settings.llm_api_key}"
