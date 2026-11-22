@@ -1,0 +1,179 @@
+name: empirical
+
+x-api: &api
+  image: empirical-api:local
+  build:
+    context: ./empirical-api
+    dockerfile: Dockerfile
+  restart: unless-stopped
+
+services:
+  model-downloader:
+    build:
+      context: ./empirical-api
+      dockerfile: docker/model-downloader.Dockerfile
+    image: empirical-api-model-downloader:local
+    environment:
+      QWEN_MODEL_REPO: ${QWEN_MODEL_REPO:-Qwen/Qwen1.5-1.8B-Chat-GGUF}
+      QWEN_MODEL_FILE: ${QWEN_MODEL_FILE:-qwen1_5-1_8b-chat-q4_k_m.gguf}
+      HF_HUB_ENABLE_HF_TRANSFER: "1"
+    volumes:
+      - models:/models
+    restart: "no"
+
+  llm:
+    image: ghcr.io/ggml-org/llama.cpp:server
+    command:
+      - -m
+      - /models/${QWEN_MODEL_FILE:-qwen1_5-1_8b-chat-q4_k_m.gguf}
+      - --alias
+      - qwen1.5-1.8b-chat
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8080"
+      - -ngl
+      - "0"
+      - -t
+      - "${LLAMA_THREADS:-4}"
+      - -tb
+      - "${LLAMA_THREADS:-4}"
+      - -c
+      - "2048"
+      - -b
+      - "512"
+      - -ub
+      - "256"
+      - --parallel
+      - "1"
+      - --cache-reuse
+      - "256"
+      - --jinja
+      - --no-webui
+    volumes:
+      - models:/models:ro
+    expose:
+      - "8080"
+    depends_on:
+      model-downloader:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  mock-api:
+    <<: *api
+    command:
+      - uvicorn
+      - app.mock_storefront:app
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8001"
+    ports:
+      - "${MOCK_API_PORT:-8001}:8001"
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import socket, urllib.request; socket.gethostbyname('mock-api'); urllib.request.urlopen('http://mock-api:8001/health', timeout=2)
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+
+  api:
+    <<: *api
+    command:
+      - uvicorn
+      - app.main:app
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8049"
+      - --workers
+      - "1"
+    environment:
+      LLM_URL: http://llm:8080
+      LLM_MODEL: qwen1.5-1.8b-chat
+      BASE_URL: http://mock-api:8001
+      TOOLS_PATH: /app/tools.json
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - ./demo-filter/empirical/tools.json:/app/tools.json:ro
+    ports:
+      - "${API_PORT:-8049}:8049"
+    depends_on:
+      llm:
+        condition: service_healthy
+      mock-api:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://127.0.0.1:8049/health', timeout=5); urllib.request.urlopen('http://mock-api:8001/health', timeout=2)
+      interval: 10s
+      timeout: 6s
+      retries: 6
+      start_period: 10s
+
+  web:
+    build:
+      context: ./empirical-clients/web
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: /api
+    image: empirical-web:local
+    environment:
+      HOST: 0.0.0.0
+      PORT: "5175"
+      EMPIRICAL_API_URL: http://api:8049
+    ports:
+      - "${WEB_PORT:-5175}:5175"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:5175/').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 10s
+    restart: unless-stopped
+
+  storefront:
+    build:
+      context: ./demo-filter
+      dockerfile: Dockerfile
+      args:
+        VITE_EMPIRICAL_WEB_URL: ${VITE_EMPIRICAL_WEB_URL:-http://localhost:5175}
+        VITE_STOREFRONT_ORIGIN: ${VITE_STOREFRONT_ORIGIN:-http://localhost:5176}
+    image: empirical-storefront:local
+    environment:
+      NODE_ENV: production
+    ports:
+      - "${STOREFRONT_PORT:-5176}:5176"
+    depends_on:
+      web:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:5176/').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  models:
