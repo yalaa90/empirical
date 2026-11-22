@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" role="img">
+  <title>Vela Yellow Court Shoes</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#fafaf9"/>
+      <stop offset="100%" stop-color="#e7e5e4"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="32%" r="68%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fabric" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#facc15"/>
+      <stop offset="48%" stop-color="#eab308"/>
+      <stop offset="100%" stop-color="#a16207"/>
+    </linearGradient>
+    <linearGradient id="fabricSoft" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#facc15"/>
+      <stop offset="100%" stop-color="#eab308"/>
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#292524" flood-opacity=".2"/>
+    </filter>
+    <pattern id="weave" width="14" height="14" patternUnits="userSpaceOnUse">
+      <path d="M0 7H14M7 0V14" stroke="#1c1917" stroke-opacity=".055" stroke-width="1"/>
+    </pattern>
+    <pattern id="corduroy" width="14" height="14" patternUnits="userSpaceOnUse">
+      <path d="M3 0V14M10 0V14" stroke="#1c1917" stroke-opacity=".14" stroke-width="2.5"/>
+      <path d="M3 0V14M10 0V14" stroke="#ffffff" stroke-opacity=".14" stroke-width="1"/>
+    </pattern>
+    <pattern id="knit" width="12" height="12" patternUnits="userSpaceOnUse">
+      <path d="M2 0V12M6 0V12M10 0V12" stroke="#1c1917" stroke-opacity=".12" stroke-width="1.5"/>
+    </pattern>
+    <pattern id="mesh" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.1" fill="#1c1917" fill-opacity=".13"/>
+      <circle cx="9" cy="9" r="1.1" fill="#1c1917" fill-opacity=".13"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <rect width="800" height="1000" fill="url(#glow)"/>
+  <circle cx="419" cy="347" r="170" fill="#eab308" opacity=".07"/>
+  <circle cx="381" cy="842" r="140" fill="#facc15" opacity=".12"/>
+  <path d="M0 820 Q400 790 800 820 L800 1000 L0 1000 Z" fill="#ffffff" opacity=".2"/>
+  <ellipse cx="400" cy="832" rx="222" ry="34" fill="#292524" opacity=".12" filter="url(#blur)"/>
+  <g transform="rotate(0 400 540)"><g filter="url(#softShadow)">
+    <path d="M118 690 C240 726 560 726 682 688 L680 722 C658 762 540 782 400 782 C258 782 144 762 116 730 Z" fill="#a8a29e" stroke="#57534e" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M118 690 C240 726 560 726 682 688 L682 706 C560 744 240 744 118 712 Z" fill="#f5f5f4" stroke="#d6d3d1" stroke-width="3"/>
+    
+    <path d="M136 692 C146 628 180 574 238 544 C286 518 330 522 356 558 C384 534 428 508 478 496 C534 484 588 502 622 552 C650 598 664 650 676 690 C560 724 242 724 136 692 Z" fill="url(#fabric)" stroke="#a16207" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M136 692 C146 628 180 574 238 544 C286 518 330 522 356 558 C384 534 428 508 478 496 C534 484 588 502 622 552 C650 598 664 650 676 690 C560 724 242 724 136 692 Z" fill="url(#weave)" opacity=".45"/>
+    <path d="M136 692 C146 628 180 574 238 544 C258 590 268 640 268 692 Z" fill="#facc15" opacity=".58" stroke="#a16207" stroke-opacity=".3" stroke-width="3"/>
+    <path d="M610 552 C640 604 662 652 676 690 L620 700 C600 650 590 600 600 552 Z" fill="#a16207" opacity=".24"/>
+    <path d="M528 505 Q590 480 626 536 Q590 558 552 544 Z" fill="#a16207" opacity=".5"/>
+    <path d="M536 512 Q590 492 616 532" fill="none" stroke="#fef08a" stroke-width="3" stroke-opacity=".55"/>
+    <path d="M602 505 Q616 482 636 496" fill="none" stroke="#a16207" stroke-width="6" stroke-linecap="round"/>
+    <path d="M352 558 Q416 526 478 510 L498 548 Q428 566 368 596 Z" fill="#facc15" opacity=".24" stroke="#a16207" stroke-opacity=".35" stroke-width="3"/>
+    <g stroke="#fef08a" stroke-width="7" stroke-linecap="round" opacity=".9">
+      <path d="M380 552 L440 526"/>
+      <path d="M400 578 L462 550"/>
+      <path d="M420 604 L482 576"/>
+      <path d="M442 630 L504 602"/>
+    </g>
+    <g stroke="#a16207" stroke-width="2.5" stroke-linecap="round" opacity=".38">
+      <path d="M374 556 L434 530"/>
+      <path d="M394 582 L456 554"/>
+      <path d="M414 608 L476 580"/>
+      <path d="M436 634 L498 606"/>
+    </g>
+    <g fill="#facc15" stroke="#a16207" stroke-width="2" opacity=".8">
+      <circle cx="374" cy="554" r="4"/>
+      <circle cx="434" cy="528" r="4"/>
+      <circle cx="394" cy="580" r="4"/>
+      <circle cx="456" cy="552" r="4"/>
+      <circle cx="414" cy="606" r="4"/>
+      <circle cx="476" cy="578" r="4"/>
+      <circle cx="436" cy="632" r="4"/>
+      <circle cx="498" cy="604" r="4"/>
+    </g>
+    <circle cx="180" cy="622" r="4" fill="#a16207" opacity=".3"/><circle cx="206" cy="622" r="4" fill="#a16207" opacity=".3"/><circle cx="232" cy="622" r="4" fill="#a16207" opacity=".3"/><circle cx="258" cy="622" r="4" fill="#a16207" opacity=".3"/><circle cx="180" cy="644" r="4" fill="#a16207" opacity=".3"/><circle cx="206" cy="644" r="4" fill="#a16207" opacity=".3"/><circle cx="232" cy="644" r="4" fill="#a16207" opacity=".3"/><circle cx="258" cy="644" r="4" fill="#a16207" opacity=".3"/>
+    <path d="M250 610 Q360 580 520 596" fill="none" stroke="#fde047" stroke-opacity=".3" stroke-width="10" stroke-linecap="round"/>
+    <path d="M620 540 Q638 570 650 612" fill="none" stroke="#a16207" stroke-opacity=".3" stroke-width="4"/>
+    <path d="M532 528 Q590 508 625 550" fill="none" stroke="#fef08a" stroke-width="4" stroke-opacity=".55"/>
+    <path d="M150 718 H660" stroke="#d6d3d1" stroke-width="4" opacity=".8"/>
+    
+  </g></g>
+</svg>

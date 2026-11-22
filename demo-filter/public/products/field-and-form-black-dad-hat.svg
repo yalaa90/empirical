@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" role="img">
+  <title>Field &amp; Form Black Dad Hat</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fafaf9"/>
+      <stop offset="100%" stop-color="#e7e5e4"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="32%" r="68%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fabric" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#292524"/>
+      <stop offset="48%" stop-color="#1c1917"/>
+      <stop offset="100%" stop-color="#0c0a09"/>
+    </linearGradient>
+    <linearGradient id="fabricSoft" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#292524"/>
+      <stop offset="100%" stop-color="#1c1917"/>
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#292524" flood-opacity=".2"/>
+    </filter>
+    <pattern id="weave" width="14" height="14" patternUnits="userSpaceOnUse">
+      <path d="M0 7H14M7 0V14" stroke="#1c1917" stroke-opacity=".055" stroke-width="1"/>
+    </pattern>
+    <pattern id="corduroy" width="14" height="14" patternUnits="userSpaceOnUse">
+      <path d="M3 0V14M10 0V14" stroke="#1c1917" stroke-opacity=".14" stroke-width="2.5"/>
+      <path d="M3 0V14M10 0V14" stroke="#ffffff" stroke-opacity=".14" stroke-width="1"/>
+    </pattern>
+    <pattern id="knit" width="12" height="12" patternUnits="userSpaceOnUse">
+      <path d="M2 0V12M6 0V12M10 0V12" stroke="#1c1917" stroke-opacity=".12" stroke-width="1.5"/>
+    </pattern>
+    <pattern id="mesh" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.1" fill="#1c1917" fill-opacity=".13"/>
+      <circle cx="9" cy="9" r="1.1" fill="#1c1917" fill-opacity=".13"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <rect width="800" height="1000" fill="url(#glow)"/>
+  <circle cx="330" cy="250" r="226" fill="#1c1917" opacity=".07"/>
+  <circle cx="470" cy="880" r="140" fill="#292524" opacity=".12"/>
+  <path d="M0 820 Q400 790 800 820 L800 1000 L0 1000 Z" fill="#ffffff" opacity=".2"/>
+  <ellipse cx="400" cy="832" rx="208" ry="34" fill="#292524" opacity=".12" filter="url(#blur)"/>
+  <g transform="rotate(-1.6 400 540)"><g filter="url(#softShadow)">
+    <path d="M268 470 Q268 306 400 292 Q532 306 532 470 Z" fill="url(#fabric)" stroke="#0c0a09" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M268 470 Q268 306 400 292 Q532 306 532 470 Z" fill="url(#weave)" opacity=".9"/>
+    
+    <path d="M400 294 V470" stroke="#0c0a09" stroke-opacity=".24" stroke-width="4"/>
+    <path d="M300 350 Q400 330 500 350" fill="none" stroke="#57534e" stroke-opacity=".18" stroke-width="12"/>
+    <path d="M185 512 Q400 472 615 512 Q622 568 400 580 Q178 568 185 512 Z" fill="url(#fabricSoft)" stroke="#0c0a09" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M185 512 Q400 472 615 512 Q622 568 400 580 Q178 568 185 512 Z" fill="url(#weave)" opacity=".7"/>
+    <path d="M185 514 Q400 476 615 514" fill="none" stroke="#78716c" stroke-width="4" stroke-opacity=".6"/>
+    <circle cx="400" cy="292" r="15" fill="#292524" stroke="#0c0a09" stroke-width="3"/>
+    <path d="M388 292 H412" stroke="#0c0a09" stroke-opacity=".3" stroke-width="3"/>
+  </g></g>
+</svg>

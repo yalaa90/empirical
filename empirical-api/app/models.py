@@ -27,7 +27,7 @@ class ToolSpec(BaseModel):
     url: str | None = None
     success_template: str | None = None
     confirm_summary: str | None = None
-    examples: list[Example] = Field(min_length=1, max_length=3)
+    examples: list[Example] = Field(min_length=1)
 
 
 class ToolFile(BaseModel):

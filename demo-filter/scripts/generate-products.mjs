@@ -1,9 +1,11 @@
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { renderProductImage } from './product-images.mjs'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const output = resolve(root, 'src/data/products.json')
+const imagesDir = resolve(root, 'public/products')
 
 const COLORS = [
   { key: 'red', label: 'Red' },
@@ -101,6 +103,9 @@ function roundPrice(value) {
   return Math.round(value * 100) / 100
 }
 
+rmSync(imagesDir, { recursive: true, force: true })
+mkdirSync(imagesDir, { recursive: true })
+
 const products = []
 let nextId = 1
 
@@ -126,11 +131,13 @@ for (const category of CATEGORIES) {
       category.key === 'tshirt' || category.key === 'hoodie'
         ? category.sizes.filter((_, sizeIndex) => sizeIndex >= index % 2)
         : category.sizes
+    const slug = slugify(name)
+    const image = `/products/${slug}.svg`
 
     products.push({
       id,
       name,
-      slug: slugify(name),
+      slug,
       brand,
       category: category.key,
       color: color.key,
@@ -140,8 +147,19 @@ for (const category of CATEGORIES) {
       stock,
       description: `The ${name} pairs ${category.blurb} with a ${color.key} finish. Built for repeat wear and easy styling.`,
       tags: [category.key, color.key, ...category.tags],
-      image: `https://picsum.photos/seed/northline-${id}/720/860`,
+      image,
     })
+
+    writeFileSync(
+      resolve(imagesDir, `${slug}.svg`),
+      renderProductImage({
+        id,
+        name,
+        category: category.key,
+        color: color.key,
+        variant: adjective,
+      }),
+    )
   }
 }
 
@@ -154,4 +172,5 @@ const summary = products.reduce((counts, product) => {
 }, {})
 
 console.log(`Wrote ${products.length} products to ${output}`)
+console.log(`Wrote ${products.length} product illustrations to ${imagesDir}`)
 console.log(summary)

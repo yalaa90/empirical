@@ -24,7 +24,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-1/720/860"
+    "image": "/products/northline-red-classic-t-shirt.svg"
   },
   {
     "id": 2,
@@ -50,7 +50,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-2/720/860"
+    "image": "/products/basalt-red-relaxed-t-shirt.svg"
   },
   {
     "id": 3,
@@ -77,7 +77,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-3/720/860"
+    "image": "/products/field-and-form-red-heavyweight-t-shirt.svg"
   },
   {
     "id": 4,
@@ -103,7 +103,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-4/720/860"
+    "image": "/products/sunday-standard-red-pocket-t-shirt.svg"
   },
   {
     "id": 5,
@@ -130,7 +130,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-5/720/860"
+    "image": "/products/alder-red-oversized-t-shirt.svg"
   },
   {
     "id": 6,
@@ -156,7 +156,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-6/720/860"
+    "image": "/products/northline-blue-classic-t-shirt.svg"
   },
   {
     "id": 7,
@@ -183,7 +183,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-7/720/860"
+    "image": "/products/basalt-blue-relaxed-t-shirt.svg"
   },
   {
     "id": 8,
@@ -209,7 +209,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-8/720/860"
+    "image": "/products/field-and-form-blue-heavyweight-t-shirt.svg"
   },
   {
     "id": 9,
@@ -236,7 +236,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-9/720/860"
+    "image": "/products/sunday-standard-blue-pocket-t-shirt.svg"
   },
   {
     "id": 10,
@@ -262,7 +262,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-10/720/860"
+    "image": "/products/alder-blue-oversized-t-shirt.svg"
   },
   {
     "id": 11,
@@ -289,7 +289,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-11/720/860"
+    "image": "/products/northline-black-classic-t-shirt.svg"
   },
   {
     "id": 12,
@@ -315,7 +315,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-12/720/860"
+    "image": "/products/basalt-black-relaxed-t-shirt.svg"
   },
   {
     "id": 13,
@@ -342,7 +342,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-13/720/860"
+    "image": "/products/field-and-form-black-heavyweight-t-shirt.svg"
   },
   {
     "id": 14,
@@ -368,7 +368,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-14/720/860"
+    "image": "/products/sunday-standard-black-pocket-t-shirt.svg"
   },
   {
     "id": 15,
@@ -395,7 +395,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-15/720/860"
+    "image": "/products/alder-black-oversized-t-shirt.svg"
   },
   {
     "id": 16,
@@ -421,7 +421,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-16/720/860"
+    "image": "/products/northline-white-classic-t-shirt.svg"
   },
   {
     "id": 17,
@@ -448,7 +448,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-17/720/860"
+    "image": "/products/basalt-white-relaxed-t-shirt.svg"
   },
   {
     "id": 18,
@@ -474,7 +474,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-18/720/860"
+    "image": "/products/field-and-form-white-heavyweight-t-shirt.svg"
   },
   {
     "id": 19,
@@ -501,7 +501,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-19/720/860"
+    "image": "/products/sunday-standard-white-pocket-t-shirt.svg"
   },
   {
     "id": 20,
@@ -527,7 +527,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-20/720/860"
+    "image": "/products/alder-white-oversized-t-shirt.svg"
   },
   {
     "id": 21,
@@ -554,7 +554,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-21/720/860"
+    "image": "/products/northline-green-classic-t-shirt.svg"
   },
   {
     "id": 22,
@@ -580,7 +580,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-22/720/860"
+    "image": "/products/basalt-green-relaxed-t-shirt.svg"
   },
   {
     "id": 23,
@@ -607,7 +607,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-23/720/860"
+    "image": "/products/field-and-form-green-heavyweight-t-shirt.svg"
   },
   {
     "id": 24,
@@ -633,7 +633,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-24/720/860"
+    "image": "/products/sunday-standard-green-pocket-t-shirt.svg"
   },
   {
     "id": 25,
@@ -660,7 +660,7 @@
       "cotton",
       "everyday"
     ],
-    "image": "https://picsum.photos/seed/northline-25/720/860"
+    "image": "/products/alder-green-oversized-t-shirt.svg"
   },
   {
     "id": 26,
@@ -687,7 +687,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-26/720/860"
+    "image": "/products/northline-red-fleece-hoodie.svg"
   },
   {
     "id": 27,
@@ -713,7 +713,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-27/720/860"
+    "image": "/products/basalt-blue-zip-up-hoodie.svg"
   },
   {
     "id": 28,
@@ -740,7 +740,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-28/720/860"
+    "image": "/products/rove-black-pullover-hoodie.svg"
   },
   {
     "id": 29,
@@ -766,7 +766,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-29/720/860"
+    "image": "/products/alder-white-boxy-hoodie.svg"
   },
   {
     "id": 30,
@@ -793,7 +793,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-30/720/860"
+    "image": "/products/northline-green-heavyweight-hoodie.svg"
   },
   {
     "id": 31,
@@ -819,7 +819,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-31/720/860"
+    "image": "/products/basalt-yellow-fleece-hoodie.svg"
   },
   {
     "id": 32,
@@ -846,7 +846,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-32/720/860"
+    "image": "/products/rove-red-zip-up-hoodie.svg"
   },
   {
     "id": 33,
@@ -872,7 +872,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-33/720/860"
+    "image": "/products/alder-blue-pullover-hoodie.svg"
   },
   {
     "id": 34,
@@ -899,7 +899,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-34/720/860"
+    "image": "/products/northline-black-boxy-hoodie.svg"
   },
   {
     "id": 35,
@@ -925,7 +925,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-35/720/860"
+    "image": "/products/basalt-white-heavyweight-hoodie.svg"
   },
   {
     "id": 36,
@@ -952,7 +952,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-36/720/860"
+    "image": "/products/rove-green-fleece-hoodie.svg"
   },
   {
     "id": 37,
@@ -978,7 +978,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-37/720/860"
+    "image": "/products/alder-yellow-zip-up-hoodie.svg"
   },
   {
     "id": 38,
@@ -1005,7 +1005,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-38/720/860"
+    "image": "/products/northline-red-pullover-hoodie.svg"
   },
   {
     "id": 39,
@@ -1031,7 +1031,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-39/720/860"
+    "image": "/products/basalt-blue-boxy-hoodie.svg"
   },
   {
     "id": 40,
@@ -1058,7 +1058,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-40/720/860"
+    "image": "/products/rove-black-heavyweight-hoodie.svg"
   },
   {
     "id": 41,
@@ -1084,7 +1084,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-41/720/860"
+    "image": "/products/alder-white-fleece-hoodie.svg"
   },
   {
     "id": 42,
@@ -1111,7 +1111,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-42/720/860"
+    "image": "/products/northline-green-zip-up-hoodie.svg"
   },
   {
     "id": 43,
@@ -1137,7 +1137,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-43/720/860"
+    "image": "/products/basalt-yellow-pullover-hoodie.svg"
   },
   {
     "id": 44,
@@ -1164,7 +1164,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-44/720/860"
+    "image": "/products/rove-red-boxy-hoodie.svg"
   },
   {
     "id": 45,
@@ -1190,7 +1190,7 @@
       "layer",
       "streetwear"
     ],
-    "image": "https://picsum.photos/seed/northline-45/720/860"
+    "image": "/products/alder-blue-heavyweight-hoodie.svg"
   },
   {
     "id": 46,
@@ -1218,7 +1218,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-46/720/860"
+    "image": "/products/terra-red-trail-shoes.svg"
   },
   {
     "id": 47,
@@ -1246,7 +1246,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-47/720/860"
+    "image": "/products/vela-blue-court-shoes.svg"
   },
   {
     "id": 48,
@@ -1274,7 +1274,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-48/720/860"
+    "image": "/products/rove-black-runner-shoes.svg"
   },
   {
     "id": 49,
@@ -1302,7 +1302,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-49/720/860"
+    "image": "/products/strider-white-canvas-shoes.svg"
   },
   {
     "id": 50,
@@ -1330,7 +1330,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-50/720/860"
+    "image": "/products/northline-green-low-shoes.svg"
   },
   {
     "id": 51,
@@ -1358,7 +1358,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-51/720/860"
+    "image": "/products/terra-yellow-trail-shoes.svg"
   },
   {
     "id": 52,
@@ -1386,7 +1386,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-52/720/860"
+    "image": "/products/vela-red-court-shoes.svg"
   },
   {
     "id": 53,
@@ -1414,7 +1414,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-53/720/860"
+    "image": "/products/rove-blue-runner-shoes.svg"
   },
   {
     "id": 54,
@@ -1442,7 +1442,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-54/720/860"
+    "image": "/products/strider-black-canvas-shoes.svg"
   },
   {
     "id": 55,
@@ -1470,7 +1470,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-55/720/860"
+    "image": "/products/northline-white-low-shoes.svg"
   },
   {
     "id": 56,
@@ -1498,7 +1498,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-56/720/860"
+    "image": "/products/terra-green-trail-shoes.svg"
   },
   {
     "id": 57,
@@ -1526,7 +1526,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-57/720/860"
+    "image": "/products/vela-yellow-court-shoes.svg"
   },
   {
     "id": 58,
@@ -1554,7 +1554,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-58/720/860"
+    "image": "/products/rove-red-runner-shoes.svg"
   },
   {
     "id": 59,
@@ -1582,7 +1582,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-59/720/860"
+    "image": "/products/strider-blue-canvas-shoes.svg"
   },
   {
     "id": 60,
@@ -1610,7 +1610,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-60/720/860"
+    "image": "/products/northline-black-low-shoes.svg"
   },
   {
     "id": 61,
@@ -1638,7 +1638,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-61/720/860"
+    "image": "/products/terra-white-trail-shoes.svg"
   },
   {
     "id": 62,
@@ -1666,7 +1666,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-62/720/860"
+    "image": "/products/vela-green-court-shoes.svg"
   },
   {
     "id": 63,
@@ -1694,7 +1694,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-63/720/860"
+    "image": "/products/rove-yellow-runner-shoes.svg"
   },
   {
     "id": 64,
@@ -1722,7 +1722,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-64/720/860"
+    "image": "/products/strider-red-canvas-shoes.svg"
   },
   {
     "id": 65,
@@ -1750,7 +1750,7 @@
       "comfort",
       "outdoor"
     ],
-    "image": "https://picsum.photos/seed/northline-65/720/860"
+    "image": "/products/northline-blue-low-shoes.svg"
   },
   {
     "id": 66,
@@ -1773,7 +1773,7 @@
       "casual",
       "accessory"
     ],
-    "image": "https://picsum.photos/seed/northline-66/720/860"
+    "image": "/products/northline-red-corduroy-hat.svg"
   },
   {
     "id": 67,
@@ -1796,7 +1796,7 @@
       "casual",
       "accessory"
     ],
-    "image": "https://picsum.photos/seed/northline-67/720/860"
+    "image": "/products/alder-blue-trucker-hat.svg"
   },
   {
     "id": 68,
@@ -1819,7 +1819,7 @@
       "casual",
       "accessory"
     ],
-    "image": "https://picsum.photos/seed/northline-68/720/860"
+    "image": "/products/field-and-form-black-beanie-hat.svg"
   },
   {
     "id": 69,
@@ -1842,7 +1842,7 @@
       "casual",
       "accessory"
     ],
-    "image": "https://picsum.photos/seed/northline-69/720/860"
+    "image": "/products/northline-white-bucket-hat.svg"
   },
   {
     "id": 70,
@@ -1865,7 +1865,7 @@
       "casual",
       "accessory"
     ],
-    "image": "https://picsum.photos/seed/northline-70/720/860"
+    "image": "/products/alder-green-dad-hat.svg"
   },
   {
     "id": 71,
@@ -1888,7 +1888,7 @@
       "casual",
       "accessory"
     ],
-    "image": "https://picsum.photos/seed/northline-71/720/860"
+    "image": "/products/field-and-form-yellow-corduroy-hat.svg"
   },
   {
     "id": 72,
@@ -1911,7 +1911,7 @@
       "casual",
       "accessory"
     ],
-    "image": "https://picsum.photos/seed/northline-72/720/860"
+    "image": "/products/northline-red-trucker-hat.svg"
   },
   {
     "id": 73,
@@ -1934,7 +1934,7 @@
       "casual",
       "accessory"
     ],
-    "image": "https://picsum.photos/seed/northline-73/720/860"
+    "image": "/products/alder-blue-beanie-hat.svg"
   },
   {
     "id": 74,
@@ -1957,7 +1957,7 @@
       "casual",
       "accessory"
     ],
-    "image": "https://picsum.photos/seed/northline-74/720/860"
+    "image": "/products/field-and-form-black-bucket-hat.svg"
   },
   {
     "id": 75,
@@ -1980,7 +1980,7 @@
       "casual",
       "accessory"
     ],
-    "image": "https://picsum.photos/seed/northline-75/720/860"
+    "image": "/products/northline-white-dad-hat.svg"
   },
   {
     "id": 76,
@@ -2003,7 +2003,7 @@
       "casual",
       "accessory"
     ],
-    "image": "https://picsum.photos/seed/northline-76/720/860"
+    "image": "/products/alder-green-corduroy-hat.svg"
   },
   {
     "id": 77,
@@ -2026,7 +2026,7 @@
       "casual",
       "accessory"
     ],
-    "image": "https://picsum.photos/seed/northline-77/720/860"
+    "image": "/products/field-and-form-yellow-trucker-hat.svg"
   },
   {
     "id": 78,
@@ -2049,7 +2049,7 @@
       "casual",
       "accessory"
     ],
-    "image": "https://picsum.photos/seed/northline-78/720/860"
+    "image": "/products/northline-red-beanie-hat.svg"
   },
   {
     "id": 79,
@@ -2072,7 +2072,7 @@
       "casual",
       "accessory"
     ],
-    "image": "https://picsum.photos/seed/northline-79/720/860"
+    "image": "/products/alder-blue-bucket-hat.svg"
   },
   {
     "id": 80,
@@ -2095,7 +2095,7 @@
       "casual",
       "accessory"
     ],
-    "image": "https://picsum.photos/seed/northline-80/720/860"
+    "image": "/products/field-and-form-black-dad-hat.svg"
   },
   {
     "id": 81,
@@ -2118,7 +2118,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-81/720/860"
+    "image": "/products/northline-red-canvas-tote-accessory.svg"
   },
   {
     "id": 82,
@@ -2141,7 +2141,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-82/720/860"
+    "image": "/products/basalt-blue-leather-wallet-accessory.svg"
   },
   {
     "id": 83,
@@ -2164,7 +2164,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-83/720/860"
+    "image": "/products/vela-black-wool-socks-accessory.svg"
   },
   {
     "id": 84,
@@ -2187,7 +2187,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-84/720/860"
+    "image": "/products/field-and-form-white-steel-bottle-accessory.svg"
   },
   {
     "id": 85,
@@ -2210,7 +2210,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-85/720/860"
+    "image": "/products/northline-green-key-clip-accessory.svg"
   },
   {
     "id": 86,
@@ -2233,7 +2233,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-86/720/860"
+    "image": "/products/basalt-yellow-canvas-tote-accessory.svg"
   },
   {
     "id": 87,
@@ -2256,7 +2256,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-87/720/860"
+    "image": "/products/vela-red-leather-wallet-accessory.svg"
   },
   {
     "id": 88,
@@ -2279,7 +2279,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-88/720/860"
+    "image": "/products/field-and-form-blue-wool-socks-accessory.svg"
   },
   {
     "id": 89,
@@ -2302,7 +2302,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-89/720/860"
+    "image": "/products/northline-black-steel-bottle-accessory.svg"
   },
   {
     "id": 90,
@@ -2325,7 +2325,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-90/720/860"
+    "image": "/products/basalt-white-key-clip-accessory.svg"
   },
   {
     "id": 91,
@@ -2348,7 +2348,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-91/720/860"
+    "image": "/products/vela-green-canvas-tote-accessory.svg"
   },
   {
     "id": 92,
@@ -2371,7 +2371,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-92/720/860"
+    "image": "/products/field-and-form-yellow-leather-wallet-accessory.svg"
   },
   {
     "id": 93,
@@ -2394,7 +2394,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-93/720/860"
+    "image": "/products/northline-red-wool-socks-accessory.svg"
   },
   {
     "id": 94,
@@ -2417,7 +2417,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-94/720/860"
+    "image": "/products/basalt-blue-steel-bottle-accessory.svg"
   },
   {
     "id": 95,
@@ -2440,7 +2440,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-95/720/860"
+    "image": "/products/vela-black-key-clip-accessory.svg"
   },
   {
     "id": 96,
@@ -2463,7 +2463,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-96/720/860"
+    "image": "/products/field-and-form-white-canvas-tote-accessory.svg"
   },
   {
     "id": 97,
@@ -2486,7 +2486,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-97/720/860"
+    "image": "/products/northline-green-leather-wallet-accessory.svg"
   },
   {
     "id": 98,
@@ -2509,7 +2509,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-98/720/860"
+    "image": "/products/basalt-yellow-wool-socks-accessory.svg"
   },
   {
     "id": 99,
@@ -2532,7 +2532,7 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-99/720/860"
+    "image": "/products/vela-red-steel-bottle-accessory.svg"
   },
   {
     "id": 100,
@@ -2555,6 +2555,6 @@
       "gift",
       "essential"
     ],
-    "image": "https://picsum.photos/seed/northline-100/720/860"
+    "image": "/products/field-and-form-blue-key-clip-accessory.svg"
   }
 ]

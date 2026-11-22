@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" role="img">
+  <title>Northline Red Beanie Hat</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fafaf9"/>
+      <stop offset="100%" stop-color="#e7e5e4"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="32%" r="68%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fabric" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#dc2626"/>
+      <stop offset="48%" stop-color="#b91c1c"/>
+      <stop offset="100%" stop-color="#7f1d1d"/>
+    </linearGradient>
+    <linearGradient id="fabricSoft" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#292524" flood-opacity=".2"/>
+    </filter>
+    <pattern id="weave" width="14" height="14" patternUnits="userSpaceOnUse">
+      <path d="M0 7H14M7 0V14" stroke="#1c1917" stroke-opacity=".055" stroke-width="1"/>
+    </pattern>
+    <pattern id="corduroy" width="14" height="14" patternUnits="userSpaceOnUse">
+      <path d="M3 0V14M10 0V14" stroke="#1c1917" stroke-opacity=".14" stroke-width="2.5"/>
+      <path d="M3 0V14M10 0V14" stroke="#ffffff" stroke-opacity=".14" stroke-width="1"/>
+    </pattern>
+    <pattern id="knit" width="12" height="12" patternUnits="userSpaceOnUse">
+      <path d="M2 0V12M6 0V12M10 0V12" stroke="#1c1917" stroke-opacity=".12" stroke-width="1.5"/>
+    </pattern>
+    <pattern id="mesh" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.1" fill="#1c1917" fill-opacity=".13"/>
+      <circle cx="9" cy="9" r="1.1" fill="#1c1917" fill-opacity=".13"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <rect width="800" height="1000" fill="url(#glow)"/>
+  <circle cx="136" cy="128" r="170" fill="#b91c1c" opacity=".07"/>
+  <circle cx="664" cy="804" r="140" fill="#dc2626" opacity=".12"/>
+  <path d="M0 820 Q400 790 800 820 L800 1000 L0 1000 Z" fill="#ffffff" opacity=".2"/>
+  <ellipse cx="400" cy="832" rx="236" ry="34" fill="#292524" opacity=".12" filter="url(#blur)"/>
+  <g transform="rotate(0.8 400 540)"><g filter="url(#softShadow)">
+      <path d="M252 540 Q244 300 400 282 Q556 300 548 540 L548 602 Q400 632 252 602 Z" fill="url(#fabric)" stroke="#7f1d1d" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M252 540 Q244 300 400 282 Q556 300 548 540 L548 602 Q400 632 252 602 Z" fill="url(#weave)" opacity=".9"/>
+      <path d="M252 520 Q400 556 548 520 L548 602 Q400 632 252 602 Z" fill="#7f1d1d" opacity=".22"/>
+      <path d="M268 536 L263 602" stroke="#7f1d1d" stroke-opacity=".18" stroke-width="3"/><path d="M294 536 L289 602" stroke="#7f1d1d" stroke-opacity=".18" stroke-width="3"/><path d="M320 536 L315 602" stroke="#7f1d1d" stroke-opacity=".18" stroke-width="3"/><path d="M346 536 L341 602" stroke="#7f1d1d" stroke-opacity=".18" stroke-width="3"/><path d="M372 536 L367 602" stroke="#7f1d1d" stroke-opacity=".18" stroke-width="3"/><path d="M398 536 L393 602" stroke="#7f1d1d" stroke-opacity=".18" stroke-width="3"/><path d="M424 536 L419 602" stroke="#7f1d1d" stroke-opacity=".18" stroke-width="3"/><path d="M450 536 L445 602" stroke="#7f1d1d" stroke-opacity=".18" stroke-width="3"/><path d="M476 536 L471 602" stroke="#7f1d1d" stroke-opacity=".18" stroke-width="3"/><path d="M502 536 L497 602" stroke="#7f1d1d" stroke-opacity=".18" stroke-width="3"/><path d="M528 536 L523 602" stroke="#7f1d1d" stroke-opacity=".18" stroke-width="3"/>
+      <path d="M252 520 Q400 556 548 520" fill="none" stroke="#fecaca" stroke-width="4" stroke-opacity=".6"/>
+      <path d="M270 574 Q400 602 530 574" fill="none" stroke="#7f1d1d" stroke-opacity=".2" stroke-width="3"/>
+      <path d="M400 286 Q404 220 400 196" fill="none" stroke="#7f1d1d" stroke-opacity=".12" stroke-width="12"/>
+    </g></g>
+</svg>
