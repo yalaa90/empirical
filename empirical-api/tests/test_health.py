@@ -10,7 +10,7 @@ def test_health_ok(make_harness) -> None:
         body = response.json()
         assert body["status"] == "ok"
         assert body["llm"] == "ok"
-        assert body["tools"] == 6
+        assert body["tools"] == 7
 
 
 def test_health_degraded(make_harness) -> None:

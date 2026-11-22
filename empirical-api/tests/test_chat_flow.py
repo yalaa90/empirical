@@ -177,6 +177,28 @@ def test_add_red_tshirt_to_cart(make_harness) -> None:
         assert cart[0]["qty"] == 1
 
 
+def test_empty_cart_via_chat_flow(make_harness) -> None:
+    with make_harness([action("empty_cart")]) as h:
+        h.storefront.add_to_cart("tshirt", color="red")
+        response = h.client.post(
+            "/chat",
+            json={"message": "clear my cart"},
+            headers={"X-Session-Id": "alice"},
+        )
+        assert response.status_code == 200
+        body = response.json()
+        assert body["status"] == "needs_confirmation"
+        assert body["tool"] == "empty_cart"
+        assert len(h.storefront.cart_items()) == 1
+
+        confirmed = h.client.post(
+            f"/confirm/{body['action_id']}", headers={"X-Session-Id": "alice"}
+        )
+        assert confirmed.status_code == 200
+        assert confirmed.json()["data"] == {"action": "empty_cart", "removed": 1}
+        assert h.storefront.cart_items() == []
+
+
 def test_none_for_nonsense(make_harness) -> None:
     with make_harness([action("none", reason="No shopping tool matches this message.")]) as h:
         response = h.client.post(

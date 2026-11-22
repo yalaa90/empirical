@@ -318,6 +318,12 @@ class MockStorefront:
                 return dict(removed)
         return None
 
+    def empty_cart(self) -> int:
+        with self._lock:
+            removed = len(self._cart)
+            self._cart.clear()
+            return removed
+
     def cart_items(self) -> list[dict[str, Any]]:
         with self._lock:
             return [dict(line) for line in self._cart]
@@ -396,6 +402,11 @@ def create_mock_storefront_app(storefront: MockStorefront | None = None) -> Fast
                 content={"detail": f"product {payload.product_name!r} is not in the cart"},
             )
         return {"action": "remove_from_cart", **line}
+
+    @app.post("/actions/cart/clear")
+    async def empty_cart() -> dict[str, Any]:
+        removed = shop.empty_cart()
+        return {"action": "empty_cart", "removed": removed}
 
     @app.get("/actions/product")
     async def open_product(

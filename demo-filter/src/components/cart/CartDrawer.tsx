@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
@@ -18,10 +18,28 @@ export function CartDrawer() {
   const items = useCartStore((state) => state.items)
   const setQty = useCartStore((state) => state.setQty)
   const removeItem = useCartStore((state) => state.removeItem)
+  const clearCart = useCartStore((state) => state.clear)
+  const showToast = useUiStore((state) => state.showToast)
+
+  const [confirmingEmpty, setConfirmingEmpty] = useState(false)
 
   const lines = getCartLines(items)
   const totals = getCartTotals(items)
   const remaining = Math.max(0, FREE_SHIPPING_THRESHOLD - totals.subtotal)
+
+  useEffect(() => {
+    if (!open || items.length === 0) setConfirmingEmpty(false)
+  }, [open, items.length])
+
+  const emptyCart = () => {
+    clearCart()
+    setConfirmingEmpty(false)
+    showToast({
+      tone: 'success',
+      title: 'Cart emptied',
+      message: 'All items were removed from your cart.',
+    })
+  }
 
   useEffect(() => {
     if (!open) return
@@ -197,6 +215,37 @@ export function CartDrawer() {
             </div>
 
             <div className="shrink-0 border-t border-stone-200 bg-white p-5">
+              {confirmingEmpty ? (
+                <div className="mb-4 flex items-center justify-between gap-3 rounded-xl bg-red-50 px-3 py-2">
+                  <p className="text-xs font-semibold text-red-700">
+                    Empty your entire cart?
+                  </p>
+                  <div className="flex items-center gap-1">
+                    <button
+                      type="button"
+                      onClick={() => setConfirmingEmpty(false)}
+                      className="rounded-full px-3 py-1.5 text-xs font-semibold text-stone-600 transition-colors hover:bg-white"
+                    >
+                      Cancel
+                    </button>
+                    <Button size="sm" variant="danger" onClick={emptyCart}>
+                      Confirm
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <div className="mb-3 flex justify-end">
+                  <button
+                    type="button"
+                    onClick={() => setConfirmingEmpty(true)}
+                    className="inline-flex items-center gap-1.5 rounded-full px-2 py-1 text-xs font-semibold text-stone-500 transition-colors hover:bg-red-50 hover:text-red-600"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                    Empty cart
+                  </button>
+                </div>
+              )}
+
               <dl className="space-y-2 text-sm">
                 <div className="flex justify-between text-stone-500">
                   <dt>Subtotal</dt>

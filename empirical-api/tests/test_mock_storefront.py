@@ -138,6 +138,23 @@ def test_cart_add_and_remove_round_trip() -> None:
         assert missing.status_code == 404
 
 
+def test_empty_cart_clears_all_lines() -> None:
+    store = MockStorefront()
+    with TestClient(create_mock_storefront_app(store)) as client:
+        client.post("/actions/cart", json={"product_name": "tshirt", "color": "red", "qty": 2})
+        client.post("/actions/cart", json={"product_name": "hoodie", "color": "black"})
+        assert len(store.cart_items()) == 2
+
+        cleared = client.post("/actions/cart/clear")
+        assert cleared.status_code == 200
+        assert cleared.json() == {"action": "empty_cart", "removed": 2}
+        assert store.cart_items() == []
+
+        again = client.post("/actions/cart/clear")
+        assert again.status_code == 200
+        assert again.json() == {"action": "empty_cart", "removed": 0}
+
+
 def test_add_missing_product_returns_404() -> None:
     response = _client().post("/actions/cart", json={"product_name": "spaceship", "qty": 1})
     assert response.status_code == 404

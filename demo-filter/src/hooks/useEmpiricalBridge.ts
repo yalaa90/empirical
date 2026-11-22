@@ -196,6 +196,16 @@ export function useEmpiricalBridge() {
           break
         }
 
+        case 'empty_cart': {
+          cart.clear()
+          ui.showToast({
+            tone: 'success',
+            title: 'Cart emptied',
+            message: 'All items were removed from your cart.',
+          })
+          break
+        }
+
         case 'open_product': {
           const productId = numeric(data.product_id)
           if (!productId) break

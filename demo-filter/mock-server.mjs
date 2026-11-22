@@ -243,6 +243,10 @@ async function route(request, response) {
     })
   }
 
+  if (request.method === 'POST' && path === '/actions/cart/clear') {
+    return json(response, 200, { action: 'empty_cart', removed: true })
+  }
+
   if (request.method === 'GET' && path === '/actions/product') {
     const product = findProduct(
       url.searchParams.get('product_name') ?? '',

@@ -1428,6 +1428,38 @@
       ]
     },
     {
+      "name": "empty_cart",
+      "description": "Remove every item from the shopping cart. Destructive; use when the user asks to empty or clear the whole cart.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      },
+      "destructive": true,
+      "executable": true,
+      "method": "POST",
+      "url": "/actions/cart/clear",
+      "success_template": "Emptied your cart.",
+      "confirm_summary": "Empty your entire cart?",
+      "examples": [
+        {
+          "user": "empty my cart",
+          "output": {
+            "tool": "empty_cart",
+            "args": {}
+          }
+        },
+        {
+          "user": "clear the whole cart",
+          "output": {
+            "tool": "empty_cart",
+            "args": {}
+          }
+        }
+      ]
+    },
+    {
       "name": "open_product",
       "description": "Open the product detail page for a product by name and optional color.",
       "parameters": {

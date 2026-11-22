@@ -13,12 +13,13 @@ TOOLS_PATH = Path(__file__).resolve().parents[1] / "tools.json"
 def test_registry_generates_schema_and_prompt(registry: ToolRegistry) -> None:
     schema = registry.response_schema()
     branches = schema["oneOf"]
-    assert len(branches) == 6
+    assert len(branches) == 7
     by_tool = {branch["properties"]["tool"]["const"]: branch for branch in branches}
     assert set(by_tool) == {
         "search_products",
         "add_to_cart",
         "remove_from_cart",
+        "empty_cart",
         "open_product",
         "navigate",
         "none",
@@ -48,7 +49,15 @@ def test_examples_are_validated(registry: ToolRegistry) -> None:
 def test_gbnf_contains_all_tools(registry: ToolRegistry) -> None:
     grammar = registry.gbnf
     assert "root ::=" in grammar
-    for name in ("search-products", "add-to-cart", "remove-from-cart", "open-product", "navigate", "none"):
+    for name in (
+        "search-products",
+        "add-to-cart",
+        "remove-from-cart",
+        "empty-cart",
+        "open-product",
+        "navigate",
+        "none",
+    ):
         assert f"tool-{name} ::=" in grammar
     assert grammar.count("space ::=") == 1
     assert "string ::=" in grammar
