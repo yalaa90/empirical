@@ -138,6 +138,20 @@ def test_cart_add_and_remove_round_trip() -> None:
         assert missing.status_code == 404
 
 
+def test_repeated_add_reports_delta_not_running_total() -> None:
+    # Regression: clients apply `qty` as a delta, so returning the cumulative
+    # line quantity made the storefront cart grow 1 -> 3 -> 6.
+    store = MockStorefront()
+    with TestClient(create_mock_storefront_app(store)) as client:
+        for expected_total in (1, 2, 3):
+            body = client.post(
+                "/actions/cart", json={"product_name": "tshirt", "color": "red", "qty": 1}
+            ).json()
+            assert body["qty"] == 1
+            assert body["cart_qty"] == expected_total
+        assert store.cart_items()[0]["qty"] == 3
+
+
 def test_empty_cart_clears_all_lines() -> None:
     store = MockStorefront()
     with TestClient(create_mock_storefront_app(store)) as client:

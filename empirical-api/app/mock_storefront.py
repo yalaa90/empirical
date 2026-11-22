@@ -391,7 +391,14 @@ def create_mock_storefront_app(storefront: MockStorefront | None = None) -> Fast
                 status_code=404,
                 content={"detail": f"product {payload.product_name!r} not found"},
             )
-        return {"action": "add_to_cart", **line}
+        # `qty` is the amount added by THIS request (clients apply it as a delta);
+        # the running total for the cart line is exposed separately as `cart_qty`.
+        return {
+            "action": "add_to_cart",
+            **line,
+            "qty": payload.qty,
+            "cart_qty": line["qty"],
+        }
 
     @app.post("/actions/cart/remove")
     async def remove_from_cart(payload: RemoveFromCartRequest) -> Any:
